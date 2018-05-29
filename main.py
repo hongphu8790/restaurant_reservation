@@ -99,7 +99,7 @@ if __name__ == "__main__":
 
     print("=== RESTAURANT RESERVATION APPLICATION ===")
     try:
-        book_on = int(isinstance(input("Enter a day to book (0: Mon, 1:Tue, 2:Wed, 3:Thu, 4:Fri, 5:Sat, 6:Sun) : "), int))
+        book_on = int(input("Enter a day to book (0: Mon, 1:Tue, 2:Wed, 3:Thu, 4:Fri, 5:Sat, 6:Sun) : "))
         book_at = input("Enter a hour to book (example is 10:00 am) : ")
         book_duration = int(input("Enter a duration time to book (in minutes) : "))
         #book_on = 6
