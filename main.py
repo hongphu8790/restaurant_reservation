@@ -5,8 +5,8 @@ import re
 TIME_FORMAT1 = "%I:%M %p"
 TIME_FORMAT2 = "%I %p"
 
-REGEX_PARSE_PERIOD = r"(Mon|Tue|Web|Thu|Fri|Sat|Sun)-(Mon|Tue|Web|Thu|Fri|Sat|Sun)\s+(\d{1,2}:?\d{0,2}\s+(am|pm))\s+-\s+(\d{1,2}:?\d{0,2}\s+(am|pm))"
-DATE_DICTIONARY = {'MON': 0, 'TUE': 1, 'WEB': 2, 'THU': 3, 'FRI': 4, 'SAT': 5, 'SUN': 6}
+REGEX_PARSE_PERIOD = r"(Mon|Tue|Wed|Thu|Fri|Sat|Sun)-(Mon|Tue|Wed|Thu|Fri|Sat|Sun)\s+(\d{1,2}:?\d{0,2}\s+(am|pm))\s+-\s+(\d{1,2}:?\d{0,2}\s+(am|pm))"
+DATE_DICTIONARY = {'MON': 0, 'TUE': 1, 'WED': 2, 'THU': 3, 'FRI': 4, 'SAT': 5, 'SUN': 6}
 
 
 class Restaurant:
@@ -98,20 +98,22 @@ if __name__ == "__main__":
     reserv.load_csv("./restaurant_reservation_hours.csv")
 
     print("=== RESTAURANT RESERVATION APPLICATION ===")
-    book_on = int(input("Enter a day to book (0: Mon, 1:Tue, 2:Web, 3:Thu, 4:Fri, 5:Sat, 6:Sun) : "))
-    book_at = input("Enter a hour to book (example is 10:00 am) : ")
-    book_duration = int(input("Enter a duration time to book (in minutes) : "))
+    try:
+        book_on = int(isinstance(input("Enter a day to book (0: Mon, 1:Tue, 2:Wed, 3:Thu, 4:Fri, 5:Sat, 6:Sun) : "), int))
+        book_at = input("Enter a hour to book (example is 10:00 am) : ")
+        book_duration = int(input("Enter a duration time to book (in minutes) : "))
+        #book_on = 6
+        #book_at = "10:00 pm"
+        #book_duration = 40
 
-    #book_on = 6
-    #book_at = "10:00 pm"
-    #book_duration = 40
+        #book_on = 0
+        #book_at = "11:00 am"
+        #book_duration = 30
 
-    #book_on = 0
-    #book_at = "11:00 am"
-    #book_duration = 30
-
-    restaurant_allocations = reserv.reservation(book_on, book_at, book_duration)
-    if restaurant_allocations:
-        print("There are allocation restaurant: {}".format(restaurant_allocations))
-    else:
-        print("No available restaurant for booking")
+        restaurant_allocations = reserv.reservation(book_on, book_at, book_duration)
+        if restaurant_allocations:
+            print("There are allocation restaurant: {}".format(restaurant_allocations))
+        else:
+            print("No available restaurant for booking")
+    except ValueError:
+        print("Invalid input.")
